@@ -1,18 +1,12 @@
 import { useState, useEffect } from "react";
 import API_Key from "../../assets/secret";
-import History from "../History";
 
-function Form(props) {
-  const [question, setQuestion] = useState("");
-  const [answer, setAnswer] = useState("");
+function Form() {
   const [history, setHistory] = useState([]);
-  const slicedHist = history.slice(1)
+  const [initial, setInitial] = useState(false);
+  const slicedHist = history.slice(1);
 
-  useEffect(() => {
-    // console.log("updated prompt", question);
-    // console.log("updated answer", answer);
-    // console.log("updated history", history);
-  }, [question, answer, history]);
+  useEffect(() => {}, [history, initial]);
 
   const handleSubmit = async (e) => {
     let prompt = document.getElementById("question").value;
@@ -35,24 +29,23 @@ function Form(props) {
       }
     );
     let reply = await response.json();
-    await setQuestion(prompt);
-    await setAnswer(reply.choices);
+
     await setHistory([
-      { question: prompt, answers: reply.choices },
+      { question: prompt, answers: reply.choices, id: reply.id },
       ...history,
     ]);
-    await console.log(reply);
+    await setInitial(true);
   };
 
   return (
-    <form id="completion" onSubmit={handleSubmit}>
+    <form id="completion" onSubmit={handleSubmit} className="form">
       <div>
         <label htmlFor="question">Ask a question:</label>
         <br />
         <input id="question" type="text"></input>
       </div>
       <button type="submit">Submit</button>
-      {!question && !answer ? null : (
+      {initial === false ? null : (
         <main>
           <div>
             You asked: {history[0].question}
@@ -65,21 +58,24 @@ function Form(props) {
             </ul>
           </div>
           <section>
-            Previous Queries:
-            {slicedHist.map((input) => {
-              console.log(input);
-              return (
-                <div >
-                  <div>You: {input.question}</div>
-                  <ul>
-                    Her:
-                    {input.answers.map((answer) => {
-                      return <li key={answer.index}>{answer.text}</li>;
-                    })}
-                  </ul>
-                </div>
-              );
-            })}
+            Previous Queries (from newest to oldest):
+            <ol>
+              {slicedHist.map((input) => {
+                return (
+                  <div key={input.id}>
+                    <li>
+                      <div>You: {input.question}</div>
+                      Her:
+                      <ul>
+                        {input.answers.map((answer) => {
+                          return <li key={answer.index}>{answer.text}</li>;
+                        })}
+                      </ul>
+                    </li>
+                  </div>
+                );
+              })}
+            </ol>
           </section>
         </main>
       )}
