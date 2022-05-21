@@ -52,7 +52,7 @@ function Input() {
       {initial === false ? null : (
         <main className="bg-light row">
           <Card className="mt-5 mb-5 col-10 mx-auto border-success">
-            <div className=""><b>You asked:</b> {history[0].question}</div>
+            <div className=""><b>You asked:</b> <u>{history[0].question}</u></div>
             <div className=""><b>Her response:</b></div>
             <ul>
               {history[0].answers.map((answer) => {
