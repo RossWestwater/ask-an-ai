@@ -1,12 +1,12 @@
 import './App.css';
 import Header from './components/Header';
-import Form from './components/Form'
+import Input from './components/Input'
 
 function App() {
   return (
     <>
     <Header/>
-    <Form/>
+    <Input/>
     </>
   );
 }
