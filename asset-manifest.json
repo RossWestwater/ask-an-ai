@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/RossWestwater/ask-an-ai/static/css/main.073c9b0a.css",
+    "main.js": "/RossWestwater/ask-an-ai/static/js/main.5c45e1cf.js",
+    "static/js/787.86d43953.chunk.js": "/RossWestwater/ask-an-ai/static/js/787.86d43953.chunk.js",
+    "index.html": "/RossWestwater/ask-an-ai/index.html",
+    "main.073c9b0a.css.map": "/RossWestwater/ask-an-ai/static/css/main.073c9b0a.css.map",
+    "main.5c45e1cf.js.map": "/RossWestwater/ask-an-ai/static/js/main.5c45e1cf.js.map",
+    "787.86d43953.chunk.js.map": "/RossWestwater/ask-an-ai/static/js/787.86d43953.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.5c45e1cf.js"
+  ]
+}
