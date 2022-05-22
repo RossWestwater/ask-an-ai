@@ -11,7 +11,6 @@ function Input() {
   const handleSubmit = async (e) => {
     let urlPrompt = document.getElementById("question").value.split(' ').join('%20');
     let prompt = document.getElementById("question").value;
-    await console.log(prompt);
     e.preventDefault();
     let reply;
     try {

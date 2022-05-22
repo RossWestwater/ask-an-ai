@@ -1,4 +1,4 @@
-const PORT = 5000
+const port = 5000
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
@@ -25,7 +25,6 @@ app.get('/response/:prompt', (req, res) => {
       axios.request(response)
       .then((response) => {
         res.json(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -34,5 +33,5 @@ app.get('/response/:prompt', (req, res) => {
 })
 
 
-app.listen(5000, () => console.log(`server is running on PORT: ${PORT}`))
+app.listen(process.env.PORT || port, () => console.log(`server is running on PORT: ${port}`))
 
