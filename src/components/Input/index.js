@@ -23,9 +23,9 @@ function Input() {
           },
           body: JSON.stringify({
             prompt: prompt,
-            max_tokens: 30,
+            max_tokens: 100,
             temperature: 1,
-            n: 2,
+            n: 1,
           }),
         }
       );
@@ -67,7 +67,7 @@ function Input() {
               <div className="row mx-auto">
               {slicedHist.map((input) => {
                 return (
-                  <div className="p-2 col-6" key={input.id}>
+                  <div className="p-2" key={input.id}>
                     <div className="border border-info rounded mx-3 p-2"> {input.index}
                       <div><b>You asked:</b> <u>{input.question}</u></div>
                       <div><b>Response:</b><ul>
