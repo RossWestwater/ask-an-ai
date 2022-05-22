@@ -9,14 +9,12 @@ function Input() {
   useEffect(() => {}, [history, initial]);
 
   const handleSubmit = async (e) => {
-    let urlPrompt = document.getElementById("question").value.split(' ').join('%20');
     let prompt = document.getElementById("question").value;
     e.preventDefault();
     let reply;
     try {
-      const request = await fetch(`https://ask-an-ai.herokuapp.com/response/${urlPrompt}`);
+      const request = await fetch(`https://ask-an-ai-backend.herokuapp.com/${prompt}`);
       reply = await request.json();
-      await console.log('front end:',reply);
       await setHistory([
         { question: prompt, answers: reply.choices, id: reply.id },
         ...history,
@@ -36,8 +34,8 @@ function Input() {
       <Button className="mt-3" type="submit">Submit</Button>
       </div>
       {initial === false ? null : (
-        <section className="bg-light row">
-          <Card className="mt-5 mb-5 col-10 mx-auto border-success">
+        <section className="bg-light">
+          <Card className="my-5 col-10 mx-auto border-success">
             <div className="">
             <div className=""><b>You asked:</b> <u>{history[0].question}</u></div>
             <div className=""><b>response:</b></div>
@@ -51,11 +49,11 @@ function Input() {
           {history.length > 1 && 
           <section>
             <h4 className="pl-2 mb-4">Previous Queries (from newest to oldest):</h4>
-              <div className="row mx-auto">
+              <div className="mx-auto">
               {slicedHist.map((input) => {
                 return (
                   <div className="p-2" key={input.id}>
-                    <div className="border border-info rounded mx-3 p-2"> {input.index}
+                    <div className="border border-info rounded mx-auto p-2"> {input.index}
                       <div><b>You asked:</b> <u>{input.question}</u></div>
                       <div><b>Response:</b><ul>
                         {input.answers.map((answer) => {
