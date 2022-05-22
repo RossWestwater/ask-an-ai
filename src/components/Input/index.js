@@ -36,13 +36,11 @@ function Input() {
       {initial === false ? null : (
         <section className="bg-light pb-5">
           <Card className="my-5 col-10 mx-auto border-success">
-            <div className="">
             <div className=""><b>You asked:</b> <u>{history[0].question}</u></div>
-            <div className=""><b>response:</b></div>
-            </div>
+            <div className=""><b>Response:</b></div>
             <ul>
               {history[0].answers.map((answer) => {
-                return <li className="" key={answer.index}>{answer.text}</li>;
+                return <li key={answer.index}>{answer.text}</li>;
               })}
             </ul>
           </Card>
