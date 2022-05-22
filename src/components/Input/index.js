@@ -14,7 +14,7 @@ function Input() {
     e.preventDefault();
     let reply;
     try {
-      const request = await fetch(`/response/${urlPrompt}`);
+      const request = await fetch(`https://ask-an-ai.herokuapp.com/response/${urlPrompt}`);
       reply = await request.json();
       await setHistory([
         { question: prompt, answers: reply.choices, id: reply.id },
