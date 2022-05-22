@@ -9,27 +9,14 @@ function Input() {
   useEffect(() => {}, [history, initial]);
 
   const handleSubmit = async (e) => {
+    let urlPrompt = document.getElementById("question").value.split(' ').join('%20');
     let prompt = document.getElementById("question").value;
+    await console.log(prompt);
     e.preventDefault();
     let reply;
     try {
-      const response = await fetch(
-        `https://api.openai.com/v1/engines/text-curie-001/completions`,
-        {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + process.env.REACT_APP_OPENAI_API_KEY,
-          },
-          body: JSON.stringify({
-            prompt: prompt,
-            max_tokens: 100,
-            temperature: 1,
-            n: 1,
-          }),
-        }
-      );
-      reply = await response.json();
+      const request = await fetch(`/response/${urlPrompt}`);
+      reply = await request.json();
       await setHistory([
         { question: prompt, answers: reply.choices, id: reply.id },
         ...history,
