@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import API_Key from "../../assets/secret";
 import { Button, Form, Card } from 'react-bootstrap';
 
 function Input() {
@@ -19,8 +18,8 @@ function Input() {
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${API_Key}`,
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + process.env.REACT_APP_OPENAI_API_KEY,
           },
           body: JSON.stringify({
             prompt: prompt,
@@ -35,10 +34,10 @@ function Input() {
         { question: prompt, answers: reply.choices, id: reply.id },
         ...history,
       ]);
+      await setInitial(true);
     } catch (error) {
       return error;
     }
-    await setInitial(true);
   };
 
   return (
@@ -50,10 +49,12 @@ function Input() {
       <Button className="mt-3" type="submit">Submit</Button>
       </div>
       {initial === false ? null : (
-        <main className="bg-light row">
+        <section className="bg-light row">
           <Card className="mt-5 mb-5 col-10 mx-auto border-success">
+            <div className="">
             <div className=""><b>You asked:</b> <u>{history[0].question}</u></div>
-            <div className=""><b>Her response:</b></div>
+            <div className=""><b>response:</b></div>
+            </div>
             <ul>
               {history[0].answers.map((answer) => {
                 return <li className="" key={answer.index}>{answer.text}</li>;
@@ -68,13 +69,13 @@ function Input() {
                 return (
                   <div className="p-2 col-6" key={input.id}>
                     <div className="border border-info rounded mx-3 p-2"> {input.index}
-                      <div><b>You:</b> <u>{input.question}</u></div>
-                      <div><b>Her:</b></div>
-                      <ul>
+                      <div><b>You asked:</b> <u>{input.question}</u></div>
+                      <div><b>Response:</b><ul>
                         {input.answers.map((answer) => {
                           return <li key={answer.index}>{answer.text}</li>;
                         })}
                       </ul>
+                      </div>    
                     </div>
                   </div>
                 );
@@ -82,7 +83,7 @@ function Input() {
               </div>
           </section>
           }
-        </main>
+        </section>
       )}
     </Form>
   );
