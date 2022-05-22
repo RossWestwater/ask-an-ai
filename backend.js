@@ -22,9 +22,11 @@ app.get('/response/:prompt', (req, res) => {
             temperature: 1,
           }
         }
+      console.log('backend response check: ', response);
       axios.request(response)
       .then((response) => {
         res.json(response.data);
+        console.log('backend response data: ', response.data);
       })
       .catch((error) => {
         console.log(error);
