@@ -26,7 +26,7 @@ function Input() {
   };
 
   return (
-    <Form id="completion" onSubmit={handleSubmit} className="container-fluid m-0 bg-light vh-100">
+    <Form id="completion" onSubmit={handleSubmit} className="container-fluid m-0 bg-light pb-5">
       <div className="pb-3 border-bottom border-secondary">
         <Form.Label className="pt-3" htmlFor="question"><h3>Ask a question:</h3></Form.Label>
         <br />
@@ -34,7 +34,7 @@ function Input() {
       <Button className="mt-3" type="submit">Submit</Button>
       </div>
       {initial === false ? null : (
-        <section className="bg-light">
+        <section className="bg-light pb-5">
           <Card className="my-5 col-10 mx-auto border-success">
             <div className="">
             <div className=""><b>You asked:</b> <u>{history[0].question}</u></div>
